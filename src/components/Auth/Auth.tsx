@@ -6,22 +6,24 @@ interface GeoInfo {
   country: string
 }
 
+const api_id = 1207761
+const api_hash = '1acd94c546fd916fa25b73145be69da3'
+
+// 1. Create an instance
+const mtproto = new MTProto({
+  api_id,
+  api_hash,
+})
+
 export const Auth = () => {
   const [phone, setPhone] = useState('')
 
   useEffect(() => {
-    const api_id = 1207761
-    const api_hash = '1acd94c546fd916fa25b73145be69da3'
-
-    // 1. Create an instance
-    const mtproto = new MTProto({
-      api_id,
-      api_hash,
-    })
-
     // 3. Get the user country code
     mtproto.call('help.getNearestDc', {}).then(result => {
       const geo = result as GeoInfo
+
+      console.log(result)
 
       setPhone(`+${countryTelephoneCode(geo.country)}`)
     })
@@ -31,6 +33,17 @@ export const Auth = () => {
     e.preventDefault()
     console.log('val: ', e.target.value)
     setPhone(e.target.value)
+  }, [])
+
+  const onNextClick = useCallback(async () => {
+    const res = await mtproto.call('auth.sendCode', {
+      phone_number: '9996621534',
+      settings: {
+        _: 'codeSettings',
+      },
+    })
+
+    console.log(res)
   }, [])
 
   return (
@@ -54,8 +67,10 @@ export const Auth = () => {
               value={phone}
             />
           </div>
-          <div className="next-button">
-            Next <i className="material-icons next-button-icon">navigate_next</i>
+          <div className="next-button" onClick={onNextClick}>
+            <div className="next-button-content">
+              Send code <i className="material-icons next-button-icon">navigate_next</i>
+            </div>
           </div>
         </div>
       </div>

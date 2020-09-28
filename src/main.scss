@@ -26,16 +26,18 @@ body {
         margin-top: 42px;
         font-size: 24px;
         cursor: pointer;
-        text-align: center;
-        align-self: center;
 
-        &:hover {
-            color: $primary-color;
-        }
+        .next-button-content {
+            display: inline;
 
-        .next-button-icon {
-            font-size: 32px;
-            vertical-align: top;
+            &:hover {
+                color: $primary-color;
+            }
+
+            .next-button-icon {
+                font-size: 32px;
+                vertical-align: top;
+            }
         }
     }
 }
@@ -55,4 +57,12 @@ input[type="text"] {
 
     letter-spacing: 0.7px;
     font-size: 16px;
+
+    transition: 500ms;
+
+    &:focus {
+        padding: 11px;
+        font-size: 17px;
+        transition: 500m;
+    }
 }
