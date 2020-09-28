@@ -1,0 +1,58 @@
+@import './stylesheet/variables.scss';
+
+body {
+    font-family: 'Libre Franklin', sans-serif;
+    margin: 0;
+    color: $ice-color;
+    background-image: url('https://www.wallpapertip.com/wmimgs/159-1596990_dark-minimal-mountains-at-night-1080p-laptop-full.jpg');
+}
+
+.auth-page {
+    .telespector-logo {
+        margin-bottom: 24px;
+
+        .image-logo {
+            width: 240px;
+            height: 240px;
+        }
+    }
+
+    .auth-center {
+        text-align: center;
+        margin-top: 5%;
+    }
+
+    .next-button {
+        margin-top: 42px;
+        font-size: 24px;
+        cursor: pointer;
+        text-align: center;
+        align-self: center;
+
+        &:hover {
+            color: $primary-color;
+        }
+
+        .next-button-icon {
+            font-size: 32px;
+            vertical-align: top;
+        }
+    }
+}
+
+input[type="text"] {
+    padding: 10px;
+    background-color: rgba($color: #000000, $alpha: 0.6);
+    outline: none;
+    color: $ice-color;
+
+    border-radius: 8px;
+    border: none;
+    background-image: none;
+    -webkit-box-shadow: none;
+    -moz-box-shadow: none;
+    box-shadow: inset 0px 0px 7px rgba(0, 0, 0, 0.15);
+
+    letter-spacing: 0.7px;
+    font-size: 16px;
+}

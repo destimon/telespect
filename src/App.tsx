@@ -22,7 +22,6 @@ const App = () => {
 
   return (
     <div>
-      <div>Telespector</div>
       <Router>
         <Switch>
           <Route exact path="/auth" component={Auth} />
