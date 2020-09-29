@@ -1,60 +1,19 @@
+/**
+  * Variables
+  */
 @import './stylesheet/variables.scss';
 
+/**
+  * Pages
+  */
+@import './stylesheet/pages/auth.scss';
+
+/**
+  * Components
+  */
 @import './stylesheet/loaders/modal-loader.scss';
 
-body {
-    font-family: 'Libre Franklin', sans-serif;
-    margin: 0;
-    color: $ice-color;
-    background-image: url($telegram-logo-url);
-}
-
-.auth-page {
-    .telespector-logo {
-        margin-bottom: 24px;
-
-        .image-logo {
-            width: 240px;
-            height: 240px;
-        }
-    }
-
-    .auth-center {
-        text-align: center;
-        margin-top: 5%;
-    }
-
-    .next-button {
-        margin-top: 42px;
-        font-size: 24px;
-        cursor: pointer;
-
-        .next-button-content {
-            display: inline;
-
-            &:hover {
-                color: $primary-color;
-            }
-
-            .next-button-icon {
-                font-size: 32px;
-                vertical-align: top;
-            }
-        }
-    }
-}
-
-input[type="text"] {
-    padding: 10px;
-    background-color: rgba($color: #000000, $alpha: 0.6);
-    outline: none;
-    color: $ice-color;
-
-    border-radius: 8px;
-    border: none;
-    background-image: none;
-    letter-spacing: 0.7px;
-    font-size: 16px;
-
-    transition: 500ms;
-}
+/**
+  * Tags/overrides
+  */
+@import './stylesheet/override.scss';

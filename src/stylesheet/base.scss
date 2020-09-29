@@ -1,0 +1,8 @@
+@import './variables.scss';
+
+body {
+    font-family: 'Libre Franklin', sans-serif;
+    margin: 0;
+    color: $ice-color;
+    background-image: url($telegram-logo-url);
+}
