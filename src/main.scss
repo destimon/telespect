@@ -4,7 +4,7 @@ body {
     font-family: 'Libre Franklin', sans-serif;
     margin: 0;
     color: $ice-color;
-    background-image: url('https://www.wallpapertip.com/wmimgs/159-1596990_dark-minimal-mountains-at-night-1080p-laptop-full.jpg');
+    background-image: url($telegram-logo-url);
 }
 
 .auth-page {
@@ -51,18 +51,8 @@ input[type="text"] {
     border-radius: 8px;
     border: none;
     background-image: none;
-    -webkit-box-shadow: none;
-    -moz-box-shadow: none;
-    box-shadow: inset 0px 0px 7px rgba(0, 0, 0, 0.15);
-
     letter-spacing: 0.7px;
     font-size: 16px;
 
     transition: 500ms;
-
-    &:focus {
-        padding: 11px;
-        font-size: 17px;
-        transition: 500m;
-    }
 }
