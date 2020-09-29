@@ -1,5 +1,5 @@
-import { MTProto } from "@mtproto/core"
-import { CREATE_MTPROTO } from "../constants"
+import { MTProto } from '@mtproto/core'
+import { CREATE_MTPROTO } from '../constants'
 
 export const createMTProto = () => {
   const api_id = 1207761
@@ -9,6 +9,7 @@ export const createMTProto = () => {
   const mtproto = new MTProto({
     api_id,
     api_hash,
+    test: true,
   })
 
   return {
