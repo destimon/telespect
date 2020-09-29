@@ -15,11 +15,17 @@ const App = () => {
 
   return (
     <div>
-      <Navbar />
       <Router>
+        <Navbar />
         <Switch>
           <Route exact path="/" component={Home} />
-          {!1 ? <Route exact path="/auth" component={Auth} /> : <Redirect to="/" />}
+          <Route exact path="/auth" component={Auth} />
+          <Route
+            path="*"
+            component={() => {
+              return <div>404</div>
+            }}
+          />
         </Switch>
       </Router>
     </div>

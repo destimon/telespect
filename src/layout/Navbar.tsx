@@ -1,4 +1,5 @@
 import React from 'react'
+import { Link } from 'react-router-dom'
 
 interface Props {}
 
@@ -7,18 +8,24 @@ export const Navbar = (props: Props) => {
     <div className="navbar">
       <div className="navbar-menu">
         <div className="navbar-item">
-          <a className="active" href="#home">
+          <Link className="active" to="/">
             Home
-          </a>
+          </Link>
         </div>
         <div className="navbar-item">
-          <a href="#news">News</a>
+          <Link className="active" to="/asf">
+            Statistics
+          </Link>
         </div>
         <div className="navbar-item">
-          <a href="#contact">Contact</a>
+          <Link className="active" to="/2">
+            Data
+          </Link>
         </div>
         <div className="navbar-item">
-          <a href="#about">About</a>
+          <Link className="active" to="/3">
+            Management
+          </Link>
         </div>
       </div>
     </div>
