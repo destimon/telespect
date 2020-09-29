@@ -13,6 +13,6 @@ export const createMTProto = () => {
 
   return {
     type: CREATE_MTPROTO,
-    payload: mtproto
+    payload: mtproto,
   }
 }

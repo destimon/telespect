@@ -2,6 +2,7 @@ import React, { useCallback, useEffect, useState } from 'react'
 import { useSelector } from 'react-redux'
 import countryTelephoneCode from 'country-telephone-code'
 import { State } from '../../store'
+import { MTProtoLoader } from '../Loaders/MTProtoLoader'
 
 interface GeoInfo {
   country: string
@@ -23,7 +24,6 @@ export const Auth = () => {
 
   const onChangePhone = useCallback(e => {
     e.preventDefault()
-    console.log('val: ', e.target.value)
     setPhone(e.target.value)
   }, [])
 
@@ -40,7 +40,7 @@ export const Auth = () => {
     }
   }, [mtproto])
 
-  if (!mtproto) return <div />
+  if (!mtproto) return <MTProtoLoader />
 
   return (
     <div className="auth-page">
