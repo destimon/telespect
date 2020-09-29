@@ -8,8 +8,8 @@ const App = () => {
   const dispatch = useDispatch()
 
   useEffect(() => {
-    dispatch(createMTProto());
-  }, []);
+    dispatch(createMTProto())
+  }, [dispatch])
 
   return (
     <div>
