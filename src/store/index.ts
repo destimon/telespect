@@ -5,7 +5,7 @@ import { authInitialState, AuthState } from "./reducers/authReducer";
 import rootReducer from "./reducers/rootReducer"
 import { userInitialState, UserState } from "./reducers/userReducer";
 
-interface State {
+export interface State {
   user: UserState;
   auth: AuthState;
 };
