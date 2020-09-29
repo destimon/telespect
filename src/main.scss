@@ -4,6 +4,11 @@
 @import './stylesheet/variables.scss';
 
 /**
+  * Layout
+  */
+@import './stylesheet/layout/navbar.scss';
+
+/**
   * Pages
   */
 @import './stylesheet/pages/auth.scss';

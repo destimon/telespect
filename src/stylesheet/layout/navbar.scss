@@ -1,0 +1,32 @@
+@import './stylesheet/variables.scss';
+
+.navbar {
+    list-style-type: none;
+    margin: auto;
+    max-width: 1200px;
+    padding: 0;
+    overflow: hidden;
+    background-color: $secondary-color;
+    text-align: center;
+}
+
+.navbar-menu {
+    margin: auto;
+    width: 80%;
+
+    .navbar-item {
+        float: left;
+    }
+
+    .navbar-item a {
+        display: block;
+        color: white;
+        text-align: center;
+        padding: 14px 16px;
+        text-decoration: none;
+    }
+
+    .navbar-item a:hover {
+        background-color: $primary-color;
+    }
+}
