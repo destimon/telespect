@@ -6,7 +6,7 @@
     max-width: 1200px;
     padding: 0;
     overflow: hidden;
-    background-color: $secondary-color;
+    background-color: rgba($color: $secondary-color, $alpha: 0.6);
     text-align: center;
 }
 
