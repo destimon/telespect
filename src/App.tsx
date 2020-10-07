@@ -16,9 +16,12 @@ const App = () => {
   return (
     <div>
       <Router>
-        <Navbar />
         <Switch>
-          <Route exact path="/" component={Home} />
+          <Route exact path={['/']}>
+            <Navbar>
+              <Home />
+            </Navbar>
+          </Route>
           <Route exact path="/auth" component={Auth} />
           <Route
             path="*"

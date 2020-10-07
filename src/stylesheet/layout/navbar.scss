@@ -6,7 +6,7 @@
     max-width: 1200px;
     padding: 0;
     overflow: hidden;
-    background-color: $secondary-color;
+    background-color: rgba($color: $secondary-color, $alpha: 0.8);
     text-align: center;
 }
 
@@ -28,5 +28,18 @@
 
     .navbar-item a:hover {
         background-color: $primary-color;
+    }
+}
+
+
+@media (max-width: 1400px) {
+    .navbar {
+        max-width: 1000px;
+    }
+}
+
+@media (max-width: 1200px) {
+    .navbar {
+        max-width: 800px;
     }
 }
