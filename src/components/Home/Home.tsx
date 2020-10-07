@@ -1,7 +1,6 @@
 import React, { useState } from 'react'
-import { RouteComponentProps } from 'react-router-dom'
 
-interface Props extends RouteComponentProps {}
+interface Props {}
 
 const menuMock = [
   {
@@ -28,24 +27,26 @@ const menuMock = [
 
 const Home = (props: Props) => {
   return (
-    <div className="main-content">
-      <div className="menu-bar">
-        <div className="menu-content">
-          <div className="user-short-info">
-            <div className="main-info-bar">
-              <img className="user-avatar" src="default_avatar.png" alt="" />
+    <div className="home-container">
+      <div className="main-content">
+        <div className="menu-bar">
+          <div className="menu-content">
+            <div className="user-short-info">
+              <div className="main-info-bar">
+                <img className="user-avatar" src="default_avatar.png" alt="" />
+              </div>
+              <div className="main-user-info">@username</div>
+              <div className="sub-user-info">Dmitry Cherendieiev</div>
             </div>
-            <div className="main-user-info">@username</div>
-            <div className="sub-user-info">Dmitry Cherendieiev</div>
+            {menuMock.map((block, index) => (
+              <div className="menu-content-block" key={index} onClick={() => null}>
+                <div className="block-title">{block.title}</div>
+                <div className="block-desc">{block.description}</div>
+              </div>
+            ))}
           </div>
-          {menuMock.map(block => (
-            <div className="menu-content-block" onClick={() => props.history.push(block.url)}>
-              <div className="block-title">{block.title}</div>
-              <div className="block-desc">{block.description}</div>
-            </div>
-          ))}
+          <div className="terminal-container">Terminal</div>
         </div>
-        <div className="terminal-container">Content</div>
       </div>
     </div>
   )
