@@ -1,8 +1,10 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 
 import { Breadcrumb, Layout, Menu } from 'antd'
 import { UploadOutlined, UserOutlined, VideoCameraOutlined } from '@ant-design/icons'
 import { Link } from 'react-router-dom'
+import { useSelector } from 'react-redux'
+import { State } from '../store'
 
 const { Header, Content, Footer, Sider } = Layout
 
@@ -10,11 +12,35 @@ interface Props {
   children: React.ReactChild
 }
 
+interface IUser {
+  user?: {
+    first_name: string
+  }
+}
+
 export const DefaultLayout = (props: Props) => {
+  const mtproto = useSelector((state: State) => state.user.mtproto)
+  const [user, setUser] = useState<null | IUser>(null)
+
+  useEffect(() => {
+    mtproto
+      ?.call('users.getFullUser', {
+        id: {
+          _: 'inputUserSelf',
+        },
+      })
+      .then(res => {
+        console.log(res)
+        return setUser(res)
+      })
+  }, [mtproto])
+
+  if (!user) return null
+
   return (
     <Layout>
       <Sider>
-        <div className="logo" />
+        {user?.user?.first_name}
         <Menu theme="dark" mode="inline" defaultSelectedKeys={['1']}>
           <Menu.Item key="1" icon={<UserOutlined />}>
             <Link to="/">Home</Link>
