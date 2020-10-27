@@ -1,4 +1,5 @@
 import React, { useState } from 'react'
+import { DatePicker, message } from 'antd'
 
 interface Props {}
 
@@ -25,31 +26,6 @@ const menuMock = [
   },
 ]
 
-const Home = (props: Props) => {
-  return (
-    <div className="home-container">
-      <div className="main-content">
-        <div className="menu-bar">
-          <div className="menu-content">
-            <div className="user-short-info">
-              <div className="main-info-bar">
-                <img className="user-avatar" src="default_avatar.png" alt="" />
-              </div>
-              <div className="main-user-info">@username</div>
-              <div className="sub-user-info">Dmitry Cherendieiev</div>
-            </div>
-            {menuMock.map((block, index) => (
-              <div className="menu-content-block" key={index} onClick={() => null}>
-                <div className="block-title">{block.title}</div>
-                <div className="block-desc">{block.description}</div>
-              </div>
-            ))}
-          </div>
-          <div className="terminal-container">Terminal</div>
-        </div>
-      </div>
-    </div>
-  )
+export const Home = (props: Props) => {
+  return <h1>Home</h1>
 }
-
-export default Home

@@ -1,10 +1,14 @@
-import React, { useEffect } from 'react'
+import React, { Fragment, useEffect } from 'react'
 import { useDispatch } from 'react-redux'
 import { BrowserRouter as Router, Redirect, Route, Switch } from 'react-router-dom'
 import { Auth } from './components/Auth/Auth'
-import Home from './components/Home/Home'
-import { Navbar } from './layout/Navbar'
+import { Home } from './components/Home/Home'
 import { createMTProto } from './store/actions/userAction'
+import 'antd/dist/antd.css'
+
+import { DefaultLayout } from './layout/DefaultLayout'
+import { Statistics } from './components/Home/Statistics'
+import { Methods } from './components/Home/Methods'
 
 const App = () => {
   const dispatch = useDispatch()
@@ -17,10 +21,20 @@ const App = () => {
     <div>
       <Router>
         <Switch>
-          <Route exact path={['/']}>
-            <Navbar>
-              <Home />
-            </Navbar>
+          <Route exact path={['/', '/statistics', '/methods']}>
+            <DefaultLayout>
+              <Fragment>
+                <Route exact path="/">
+                  <Home />
+                </Route>
+                <Route exact path="/statistics">
+                  <Statistics />
+                </Route>
+                <Route exact path="/methods">
+                  <Methods />
+                </Route>
+              </Fragment>
+            </DefaultLayout>
           </Route>
           <Route exact path="/auth" component={Auth} />
           <Route
