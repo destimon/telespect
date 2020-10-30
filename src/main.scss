@@ -24,3 +24,19 @@
   */
 @import './stylesheet/override.scss';
 @import './stylesheet/base.scss';
+
+.user-short-info {
+  color: white;
+  padding: 12px;
+
+  hr {
+    opacity: .25;
+    margin-top: 16px;
+    box-shadow: none;
+    border-style: solid;
+  }
+}
+
+.page-container {
+  padding: 32px;
+}

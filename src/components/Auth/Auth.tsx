@@ -70,6 +70,8 @@ export const Auth = () => {
     (e: React.ChangeEvent<HTMLInputElement>) => {
       e.preventDefault()
 
+      if (/[a-zA-Z]/gi.test(e.target.value)) return
+
       if (stage === AUTH_STAGES_INDEXES.PHONE_STAGE) setPhone(e.target.value)
       else setCode(e.target.value)
     },
