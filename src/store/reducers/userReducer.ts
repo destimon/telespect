@@ -1,21 +1,22 @@
-import { MTProto } from "@mtproto/core";
-import { CREATE_MTPROTO } from "../constants";
+import { IUser } from '../../types'
+import { GET_USER } from '../constants'
 
 export interface UserState {
-  mtproto: MTProto | null;
+  userData: IUser | null
 }
 
 export const userInitialState: UserState = {
-  mtproto: null,
+  userData: null,
 }
 
 export const userReducer = (state = userInitialState, action) => {
   switch (action.type) {
-    case CREATE_MTPROTO:
+    case GET_USER:
       return {
         ...state,
-        mtproto: action.payload
+        userData: action.payload,
       }
-    default: return state;
+    default:
+      return state
   }
 }

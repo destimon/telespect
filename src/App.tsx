@@ -3,18 +3,18 @@ import { useDispatch } from 'react-redux'
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom'
 import { Auth } from './components/Auth/Auth'
 import { Home } from './components/Home/Home'
-import { createMTProto } from './store/actions/userAction'
 import 'antd/dist/antd.css'
 
 import { DefaultLayout } from './layout/DefaultLayout'
 import { Statistics } from './components/Home/Statistics'
 import { Methods } from './components/Home/Methods'
+import { TG_getUser } from './store/actions/userAction'
 
 const App = () => {
   const dispatch = useDispatch()
 
   useEffect(() => {
-    dispatch(createMTProto())
+    dispatch(TG_getUser)
   }, [dispatch])
 
   return (
