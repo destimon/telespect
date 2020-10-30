@@ -1,6 +1,6 @@
-import React, { useEffect, useState } from 'react'
+import React, { useEffect } from 'react'
 
-import { Layout, Menu } from 'antd'
+import { Divider, Layout, Menu } from 'antd'
 import { UploadOutlined, UserOutlined, VideoCameraOutlined } from '@ant-design/icons'
 import { Link } from 'react-router-dom'
 import { useDispatch, useSelector } from 'react-redux'
@@ -21,13 +21,15 @@ export const DefaultLayout = (props: Props) => {
     dispatch(TG_getUser())
   }, [])
 
+  console.log(userData)
   if (!userData) return null
 
   return (
     <Layout>
       <Sider>
         <div className="user-short-info">
-          {userData.user?.first_name} <hr />
+          {userData.user?.first_name}
+          <Divider />
         </div>
         <Menu theme="dark" mode="inline" defaultSelectedKeys={['1']}>
           <Menu.Item key="1" icon={<UserOutlined />}>

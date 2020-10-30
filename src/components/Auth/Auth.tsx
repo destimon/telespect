@@ -1,6 +1,9 @@
 import React, { useCallback, useEffect, useState } from 'react'
 import countryTelephoneCode from 'country-telephone-code'
 import { mtproto } from '../../api/telegramApi'
+import { Redirect } from 'react-router-dom'
+import { useSelector } from 'react-redux'
+import { State } from '../../store'
 
 interface GeoInfoRes {
   country: string
@@ -41,6 +44,7 @@ enum AUTH_STAGES_INDEXES {
 }
 
 export const Auth = () => {
+  const userData = useSelector((state: State) => state.user.userData)
   const [phone, setPhone] = useState('')
   const [code, setCode] = useState('')
   const [hash, setHash] = useState('')
@@ -91,6 +95,8 @@ export const Auth = () => {
   }, [hash, stage])
 
   const stageData = AUTH_STAGES[stage]
+
+  if (userData) return <Redirect to="/" />
 
   return (
     <div className="auth-page">
