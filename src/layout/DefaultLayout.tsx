@@ -1,12 +1,12 @@
 import React, { useEffect, useState } from 'react'
 
-import { Breadcrumb, Layout, Menu } from 'antd'
+import { Layout, Menu } from 'antd'
 import { UploadOutlined, UserOutlined, VideoCameraOutlined } from '@ant-design/icons'
 import { Link } from 'react-router-dom'
 import { useSelector } from 'react-redux'
 import { State } from '../store'
 
-const { Header, Content, Footer, Sider } = Layout
+const { Content, Sider } = Layout
 
 interface Props {
   children: React.ReactChild
@@ -40,7 +40,9 @@ export const DefaultLayout = (props: Props) => {
   return (
     <Layout>
       <Sider>
-        {user?.user?.first_name}
+        <div className="user-short-info">
+          {user?.user?.first_name} <hr />
+        </div>
         <Menu theme="dark" mode="inline" defaultSelectedKeys={['1']}>
           <Menu.Item key="1" icon={<UserOutlined />}>
             <Link to="/">Home</Link>
