@@ -1,19 +1,27 @@
-import { MTProto } from '@mtproto/core'
-import { CREATE_MTPROTO } from '../constants'
+import { Dispatch } from 'redux'
+import { mtproto } from '../../api/telegramApi'
+import { IUser } from '../../types'
+import { GET_USER } from '../constants'
 
-export const createMTProto = () => {
-  const api_id = 1207761
-  const api_hash = '1acd94c546fd916fa25b73145be69da3'
+export const getUser = (user: IUser) => ({
+  type: GET_USER,
+  payload: user,
+})
 
-  // 1. Create an instance
-  const mtproto = new MTProto({
-    api_id,
-    api_hash,
-    test: true,
-  })
+/**
+ * Telegram API communication
+ */
 
-  return {
-    type: CREATE_MTPROTO,
-    payload: mtproto,
+export const TG_getUser = () => async (dispatch: Dispatch) => {
+  try {
+    const res = await mtproto.call('users.getFullUser', {
+      id: {
+        _: 'inputUserSelf',
+      },
+    })
+
+    dispatch(getUser(res))
+  } catch (err) {
+    console.error(err)
   }
 }

@@ -1,10 +1,11 @@
-import React, { useEffect, useState } from 'react'
+import React, { useEffect } from 'react'
 
-import { Layout, Menu } from 'antd'
+import { Divider, Layout, Menu } from 'antd'
 import { UploadOutlined, UserOutlined, VideoCameraOutlined } from '@ant-design/icons'
 import { Link } from 'react-router-dom'
-import { useSelector } from 'react-redux'
+import { useDispatch, useSelector } from 'react-redux'
 import { State } from '../store'
+import { TG_getUser } from '../store/actions/userAction'
 
 const { Content, Sider } = Layout
 
@@ -12,36 +13,23 @@ interface Props {
   children: React.ReactChild
 }
 
-interface IUser {
-  user?: {
-    first_name: string
-  }
-}
-
 export const DefaultLayout = (props: Props) => {
-  const mtproto = useSelector((state: State) => state.user.mtproto)
-  const [user, setUser] = useState<null | IUser>(null)
+  const dispatch = useDispatch()
+  const userData = useSelector((state: State) => state.user.userData)
 
   useEffect(() => {
-    mtproto
-      ?.call('users.getFullUser', {
-        id: {
-          _: 'inputUserSelf',
-        },
-      })
-      .then(res => {
-        console.log(res)
-        return setUser(res)
-      })
-  }, [mtproto])
+    dispatch(TG_getUser())
+  }, [])
 
-  if (!user) return null
+  console.log(userData)
+  if (!userData) return null
 
   return (
     <Layout>
       <Sider>
         <div className="user-short-info">
-          {user?.user?.first_name} <hr />
+          {userData.user?.first_name}
+          <Divider />
         </div>
         <Menu theme="dark" mode="inline" defaultSelectedKeys={['1']}>
           <Menu.Item key="1" icon={<UserOutlined />}>

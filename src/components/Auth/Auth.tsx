@@ -1,8 +1,9 @@
 import React, { useCallback, useEffect, useState } from 'react'
-import { useSelector } from 'react-redux'
 import countryTelephoneCode from 'country-telephone-code'
+import { mtproto } from '../../api/telegramApi'
+import { Redirect } from 'react-router-dom'
+import { useSelector } from 'react-redux'
 import { State } from '../../store'
-import { MTProtoLoader } from '../Loaders/MTProtoLoader'
 
 interface GeoInfoRes {
   country: string
@@ -43,28 +44,19 @@ enum AUTH_STAGES_INDEXES {
 }
 
 export const Auth = () => {
+  const userData = useSelector((state: State) => state.user.userData)
   const [phone, setPhone] = useState('')
   const [code, setCode] = useState('')
   const [hash, setHash] = useState('')
   const [stage, setStage] = useState(AUTH_STAGES_INDEXES.PHONE_STAGE)
 
-  const mtproto = useSelector((state: State) => state.user.mtproto)
-
   useEffect(() => {
-    mtproto
-      ?.call('users.getFullUser', {
-        id: {
-          _: 'inputUserSelf',
-        },
-      })
-      .then(res => console.log(res))
-
-    mtproto?.call('help.getNearestDc', {}).then(result => {
+    mtproto.call('help.getNearestDc', {}).then(result => {
       const geo = result as GeoInfoRes
 
       setPhone(`+${countryTelephoneCode(geo.country)}`)
     })
-  }, [mtproto])
+  }, [])
 
   const onChangeField = useCallback(
     (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -79,34 +71,32 @@ export const Auth = () => {
   )
 
   const onNextClick = useCallback(async () => {
-    if (mtproto) {
-      if (stage === AUTH_STAGES_INDEXES.PHONE_STAGE) {
-        const res = (await mtproto.call('auth.sendCode', {
-          phone_number: '9996627534',
-          settings: { _: 'codeSettings' },
-        })) as SendCodeRes
+    if (stage === AUTH_STAGES_INDEXES.PHONE_STAGE) {
+      const res = (await mtproto.call('auth.sendCode', {
+        phone_number: '9996627534',
+        settings: { _: 'codeSettings' },
+      })) as SendCodeRes
 
-        console.log(res)
+      console.log(res)
 
-        setStage(AUTH_STAGES_INDEXES.CODE_STAGE)
-        setHash(res.phone_code_hash)
-      } else if (stage === AUTH_STAGES_INDEXES.CODE_STAGE) {
-        console.log(hash)
+      setStage(AUTH_STAGES_INDEXES.CODE_STAGE)
+      setHash(res.phone_code_hash)
+    } else if (stage === AUTH_STAGES_INDEXES.CODE_STAGE) {
+      console.log(hash)
 
-        const res = (await mtproto.call('auth.signIn', {
-          phone_code: '22222',
-          phone_number: '9996627534',
-          phone_code_hash: hash,
-        })) as SignInRes
+      const res = (await mtproto.call('auth.signIn', {
+        phone_code: '22222',
+        phone_number: '9996627534',
+        phone_code_hash: hash,
+      })) as SignInRes
 
-        console.log(res)
-      }
+      console.log(res)
     }
-  }, [mtproto, hash, stage])
-
-  if (!mtproto) return <MTProtoLoader />
+  }, [hash, stage])
 
   const stageData = AUTH_STAGES[stage]
+
+  if (userData) return <Redirect to="/" />
 
   return (
     <div className="auth-page">

@@ -25,16 +25,23 @@
 @import './stylesheet/override.scss';
 @import './stylesheet/base.scss';
 
+.led-green {
+  margin: 12  px;
+  width: 12px;
+  height: 12px;
+  background-color: #690;
+  border-radius: 50%;
+  margin-top: 10px;
+}
+
+.avatar {
+  border-radius: 32px;
+  width: auto;
+}
+
 .user-short-info {
   color: white;
   padding: 12px;
-
-  hr {
-    opacity: .25;
-    margin-top: 16px;
-    box-shadow: none;
-    border-style: solid;
-  }
 }
 
 .page-container {
