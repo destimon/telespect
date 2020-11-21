@@ -1,5 +1,5 @@
 import React, { Fragment, useEffect } from 'react'
-import { useDispatch } from 'react-redux'
+import { useDispatch, useSelector } from 'react-redux'
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom'
 import { Auth } from './components/Auth/Auth'
 import { Home } from './components/Home/Home'
@@ -10,25 +10,33 @@ import { Statistics } from './components/Home/Statistics'
 import { Methods } from './components/Home/Methods'
 import { getPeerList, pushNewMessage, TG_getSelfUser } from './store/actions/userAction'
 import { mtproto } from './api/telegramApi'
+import { State } from './store'
 
 const App = () => {
   const dispatch = useDispatch()
+  const peers = useSelector((state: State) => state.user.peers)
 
   useEffect(() => {
-    dispatch(TG_getSelfUser)
     dispatch(getPeerList())
-
-    mtproto.updates.on('updateShortMessage', message => {
-      console.log(message)
-
-      dispatch(
-        pushNewMessage({
-          user_id: message.user_id,
-          text: message.message,
-        })
-      )
-    })
+    dispatch(TG_getSelfUser)
   }, [dispatch])
+
+  useEffect(() => {
+    mtproto.updates.on('updateShortMessage', message => {
+      const definePeer = peers.find(peer => peer.user_id === message.user_id)
+
+      if (!definePeer) {
+        // Push user
+      } else {
+        dispatch(
+          pushNewMessage({
+            ...definePeer,
+            text: message.message,
+          })
+        )
+      }
+    })
+  }, [peers])
 
   return (
     <div>

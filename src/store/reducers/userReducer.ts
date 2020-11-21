@@ -1,10 +1,10 @@
-import { IMessage, IUser } from '../../types'
+import { IMessage, IPeer, IUser } from '../../types'
 import { GET_PEER_LIST, GET_USER, PUSH_NEW_MESSAGE } from '../constants'
 
 export interface UserState {
   userData: IUser | null
   messages: IMessage[]
-  peers: IUser[]
+  peers: IPeer[]
 }
 
 export const userInitialState: UserState = {

@@ -35,11 +35,10 @@ export const getPeerList = () => async (dispatch: Dispatch) => {
   try {
     const response: AxiosResponse = await axios.get(`http://localhost:5000/api/users`)
 
-    console.log(response)
-    return {
+    dispatch({
       type: GET_PEER_LIST,
       payload: response.data,
-    }
+    })
   } catch (err) {
     console.error(err)
   }
