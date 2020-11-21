@@ -39,7 +39,7 @@ const AUTH_STAGES = [
 ]
 
 enum AUTH_STAGES_INDEXES {
-  PHONE_STAGE,
+  PHONE_STAGE = 0,
   CODE_STAGE,
 }
 
@@ -60,10 +60,10 @@ export const Auth = () => {
 
   const onChangeField = useCallback(
     (e: React.ChangeEvent<HTMLInputElement>) => {
-      e.preventDefault()
+      // e.preventDefault()
 
-      if (/[a-zA-Z]/gi.test(e.target.value)) return
-
+      // if (/[a-zA-Z]/gi.test(e.target.value)) return
+      console.log(code)
       if (stage === AUTH_STAGES_INDEXES.PHONE_STAGE) setPhone(e.target.value)
       else setCode(e.target.value)
     },
@@ -71,9 +71,10 @@ export const Auth = () => {
   )
 
   const onNextClick = useCallback(async () => {
+    console.log(phone)
     if (stage === AUTH_STAGES_INDEXES.PHONE_STAGE) {
       const res = (await mtproto.call('auth.sendCode', {
-        phone_number: '9996627534',
+        phone_number: phone,
         settings: { _: 'codeSettings' },
       })) as SendCodeRes
 
@@ -85,14 +86,14 @@ export const Auth = () => {
       console.log(hash)
 
       const res = (await mtproto.call('auth.signIn', {
-        phone_code: '22222',
-        phone_number: '9996627534',
+        phone_code: code,
+        phone_number: phone,
         phone_code_hash: hash,
       })) as SignInRes
 
       console.log(res)
     }
-  }, [hash, stage])
+  }, [hash, stage, phone, code])
 
   const stageData = AUTH_STAGES[stage]
 

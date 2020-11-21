@@ -8,13 +8,26 @@ import 'antd/dist/antd.css'
 import { DefaultLayout } from './layout/DefaultLayout'
 import { Statistics } from './components/Home/Statistics'
 import { Methods } from './components/Home/Methods'
-import { TG_getUser } from './store/actions/userAction'
+import { getPeerList, pushNewMessage, TG_getSelfUser } from './store/actions/userAction'
+import { mtproto } from './api/telegramApi'
 
 const App = () => {
   const dispatch = useDispatch()
 
   useEffect(() => {
-    dispatch(TG_getUser)
+    dispatch(TG_getSelfUser)
+    dispatch(getPeerList())
+
+    mtproto.updates.on('updateShortMessage', message => {
+      console.log(message)
+
+      dispatch(
+        pushNewMessage({
+          user_id: message.user_id,
+          text: message.message,
+        })
+      )
+    })
   }, [dispatch])
 
   return (

@@ -5,7 +5,7 @@ import { UploadOutlined, UserOutlined, VideoCameraOutlined } from '@ant-design/i
 import { Link } from 'react-router-dom'
 import { useDispatch, useSelector } from 'react-redux'
 import { State } from '../store'
-import { TG_getUser } from '../store/actions/userAction'
+import { TG_getSelfUser } from '../store/actions/userAction'
 
 const { Content, Sider } = Layout
 
@@ -18,7 +18,7 @@ export const DefaultLayout = (props: Props) => {
   const userData = useSelector((state: State) => state.user.userData)
 
   useEffect(() => {
-    dispatch(TG_getUser())
+    dispatch(TG_getSelfUser())
   }, [])
 
   console.log(userData)

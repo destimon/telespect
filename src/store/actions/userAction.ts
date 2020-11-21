@@ -1,18 +1,54 @@
+import axios, { AxiosResponse } from 'axios'
 import { Dispatch } from 'redux'
 import { mtproto } from '../../api/telegramApi'
-import { IUser } from '../../types'
-import { GET_USER } from '../constants'
+import { IMessage, IUser } from '../../types'
+import { GET_PEER_LIST, GET_USER, PUSH_NEW_MESSAGE } from '../constants'
 
-export const getUser = (user: IUser) => ({
+/**
+ * Standard API communication
+ */
+
+export const getSelfUser = (user: IUser) => ({
   type: GET_USER,
   payload: user,
 })
 
+export const savePeer = (user: IUser) => async (dispatch: Dispatch) => {
+  try {
+    const response: AxiosResponse = await axios.post('http://localhost:5000/api/users', {
+      ...user.user,
+    })
+
+    console.log(response)
+    return {}
+  } catch (err) {
+    console.error(err)
+  }
+}
+
+export const pushNewMessage = (message: IMessage) => ({
+  type: PUSH_NEW_MESSAGE,
+  payload: message,
+})
+
+export const getPeerList = () => async (dispatch: Dispatch) => {
+  try {
+    const response: AxiosResponse = await axios.get(`http://localhost:5000/api/users`)
+
+    console.log(response)
+    return {
+      type: GET_PEER_LIST,
+      payload: response.data,
+    }
+  } catch (err) {
+    console.error(err)
+  }
+}
 /**
  * Telegram API communication
  */
 
-export const TG_getUser = () => async (dispatch: Dispatch) => {
+export const TG_getSelfUser = () => async (dispatch: Dispatch) => {
   try {
     const res = await mtproto.call('users.getFullUser', {
       id: {
@@ -20,7 +56,7 @@ export const TG_getUser = () => async (dispatch: Dispatch) => {
       },
     })
 
-    dispatch(getUser(res))
+    dispatch(getSelfUser(res))
   } catch (err) {
     console.error(err)
   }
