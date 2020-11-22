@@ -1,8 +1,8 @@
-import axios, { AxiosResponse } from 'axios'
 import { Dispatch } from 'redux'
 import backendApi from '../../api/backendApi'
-import { mtproto } from '../../api/telegramApi'
-import { IMessage, IUser, TG_IPeer, TG_IUser } from '../../types'
+import telegramApi from '../../api/telegramApi'
+import telegramHelpers from '../../api/telegramHelpers'
+import { IMessage, IUser } from '../../types'
 import { GET_PEER_LIST, GET_USER, PUSH_NEW_MESSAGE } from '../constants'
 
 /**
@@ -40,22 +40,10 @@ export const getPeerList = () => async (dispatch: Dispatch) => {
 
 export const TG_getSelfUser = () => async (dispatch: Dispatch) => {
   try {
-    const res = (await mtproto.call('users.getFullUser', {
-      id: {
-        _: 'inputUserSelf',
-      },
-    })) as TG_IUser
+    const tgUser = await telegramApi.getSelfUser()
+    const user = telegramHelpers.extractUser(tgUser)
 
-    const userObj: IUser = {
-      user_id: res.user.user_id,
-      username: res.user.username,
-      first_name: res.user.first_name,
-      last_name: res.user.last_name,
-      access_hash: res.user.access_hash,
-    }
-
-    console.log(res)
-    dispatch(getSelfUser(userObj))
+    dispatch(getSelfUser(user))
   } catch (err) {
     console.error(err)
   }

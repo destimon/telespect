@@ -1,7 +1,6 @@
 import { Avatar, List } from 'antd'
-import React, { useEffect, useState } from 'react'
+import React from 'react'
 import { useSelector } from 'react-redux'
-import { mtproto } from '../../api/telegramApi'
 import { State } from '../../store'
 
 interface Props {}
@@ -9,18 +8,6 @@ interface Props {}
 export const Methods = (props: Props) => {
   const messages = useSelector((state: State) => state.user.messages)
   const peers = useSelector((state: State) => state.user.peers)
-
-  const getUnread = async () => {
-    try {
-      const res = await mtproto.call('messages.getAllChats', {
-        except_ids: [],
-      })
-
-      console.log('res: ', res)
-    } catch (err) {
-      console.error(err)
-    }
-  }
 
   return (
     <div>

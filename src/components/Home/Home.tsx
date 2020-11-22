@@ -1,9 +1,8 @@
 import React from 'react'
-import { Avatar, Col, Divider, List, Row } from 'antd'
+import { Avatar, Col, List, Row } from 'antd'
 import { useSelector } from 'react-redux'
 import { State } from '../../store'
 import Title from 'antd/lib/typography/Title'
-import { mtproto } from '../../api/telegramApi'
 
 interface Props {}
 
@@ -11,18 +10,6 @@ export const Home = (props: Props) => {
   const userData = useSelector((state: State) => state.user.userData)
   const messages = useSelector((state: State) => state.user.messages)
   const peers = useSelector((state: State) => state.user.peers)
-
-  const getUnread = async () => {
-    try {
-      const res = await mtproto.call('messages.getAllChats', {
-        except_ids: [],
-      })
-
-      console.log('res: ', res)
-    } catch (err) {
-      console.error(err)
-    }
-  }
 
   return (
     <div className="page-container">

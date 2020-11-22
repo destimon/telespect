@@ -38,3 +38,13 @@ export interface TG_IPeer {
     access_hash: string
   }
 }
+
+export interface GeoInfoRes {
+  country: string
+}
+
+export interface SendCodeRes {
+  phone_code_hash: string
+}
+
+export interface SignInRes {}

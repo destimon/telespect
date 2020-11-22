@@ -1,19 +1,9 @@
 import React, { useCallback, useEffect, useState } from 'react'
 import countryTelephoneCode from 'country-telephone-code'
-import { mtproto } from '../../api/telegramApi'
+import telegramApi from '../../api/telegramApi'
 import { Redirect } from 'react-router-dom'
 import { useSelector } from 'react-redux'
 import { State } from '../../store'
-
-interface GeoInfoRes {
-  country: string
-}
-
-interface SendCodeRes {
-  phone_code_hash: string
-}
-
-interface SignInRes {}
 
 const inputFieldJSX = (value, func) => (
   <input
@@ -50,12 +40,14 @@ export const Auth = () => {
   const [hash, setHash] = useState('')
   const [stage, setStage] = useState(AUTH_STAGES_INDEXES.PHONE_STAGE)
 
-  useEffect(() => {
-    mtproto.call('help.getNearestDc', {}).then(result => {
-      const geo = result as GeoInfoRes
+  const getNearDc = useCallback(async () => {
+    const geo = await telegramApi.getGeoCode()
 
-      setPhone(`+${countryTelephoneCode(geo.country)}`)
-    })
+    setPhone(`+${countryTelephoneCode(geo.country)}`)
+  }, [])
+
+  useEffect(() => {
+    getNearDc()
   }, [])
 
   const onChangeField = useCallback(
@@ -70,27 +62,13 @@ export const Auth = () => {
   )
 
   const onNextClick = useCallback(async () => {
-    console.log(phone)
     if (stage === AUTH_STAGES_INDEXES.PHONE_STAGE) {
-      const res = (await mtproto.call('auth.sendCode', {
-        phone_number: phone,
-        settings: { _: 'codeSettings' },
-      })) as SendCodeRes
-
-      console.log(res)
+      const response = await telegramApi.sendCode(phone)
 
       setStage(AUTH_STAGES_INDEXES.CODE_STAGE)
-      setHash(res.phone_code_hash)
+      setHash(response.phone_code_hash)
     } else if (stage === AUTH_STAGES_INDEXES.CODE_STAGE) {
-      console.log(hash)
-
-      const res = (await mtproto.call('auth.signIn', {
-        phone_code: code,
-        phone_number: phone,
-        phone_code_hash: hash,
-      })) as SignInRes
-
-      console.log(res)
+      await telegramApi.signIn(code, phone, hash)
     }
   }, [hash, stage, phone, code])
 

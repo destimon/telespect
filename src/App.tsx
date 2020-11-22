@@ -9,9 +9,10 @@ import { DefaultLayout } from './layout/DefaultLayout'
 import { Statistics } from './components/Home/Statistics'
 import { Methods } from './components/Home/Methods'
 import { getPeerList, pushNewMessage, savePeer, TG_getSelfUser } from './store/actions/userAction'
-import { mtproto } from './api/telegramApi'
+import telegramApi, { mtproto } from './api/telegramApi'
 import { State } from './store'
-import { IMessage, IPeer, TG_IMessage, TG_IPeer } from './types'
+import { IPeer, TG_IMessage } from './types'
+import telegramHelpers from './api/telegramHelpers'
 
 const App = () => {
   const dispatch = useDispatch()
@@ -28,25 +29,13 @@ const App = () => {
   }, [dispatch])
 
   const definePeer = useCallback(async () => {
-    const TG_definedPeer = (await mtproto.call('users.getFullUser', {
-      id: {
-        _: 'inputUser',
-        user_id: receivedMessage?.user_id,
-        access_hash: userData?.access_hash,
-      },
-    })) as TG_IPeer
+    if (receivedMessage && userData) {
+      const tgPeer = await telegramApi.getUser(receivedMessage.user_id, userData.access_hash)
+      const extractedPeer = telegramHelpers.extractPeer(tgPeer)
 
-    const userObj: IPeer = {
-      user_id: TG_definedPeer.user.id,
-      username: TG_definedPeer.user.username,
-      first_name: TG_definedPeer.user.first_name,
-      last_name: TG_definedPeer.user.last_name,
-      access_hash: TG_definedPeer.user.access_hash,
+      setDefinedPeer(extractedPeer)
+      dispatch(savePeer(extractedPeer))
     }
-
-    setDefinedPeer(userObj)
-
-    dispatch(savePeer(userObj))
   }, [receivedMessage])
 
   useEffect(() => {
