@@ -1,5 +1,6 @@
 import axios, { AxiosResponse } from 'axios'
 import { Dispatch } from 'redux'
+import backendApi from '../../api/backendApi'
 import { mtproto } from '../../api/telegramApi'
 import { IMessage, IUser, TG_IPeer, TG_IUser } from '../../types'
 import { GET_PEER_LIST, GET_USER, PUSH_NEW_MESSAGE } from '../constants'
@@ -14,19 +15,10 @@ export const getSelfUser = (user: IUser) => ({
 })
 
 export const savePeer = (user: IUser) => async (dispatch: Dispatch) => {
-  try {
-    const response: AxiosResponse = await axios.post('http://localhost:5000/api/users', {
-      user_id: user.user_id,
-      username: user.username,
-      first_name: user.first_name,
-      last_name: user.last_name,
-    })
+  const result = await backendApi.addNewUser(user)
 
-    console.log(response)
-    return {}
-  } catch (err) {
-    console.error(err)
-  }
+  console.log(result)
+  return {}
 }
 
 export const pushNewMessage = (message: IMessage) => ({
@@ -35,16 +27,12 @@ export const pushNewMessage = (message: IMessage) => ({
 })
 
 export const getPeerList = () => async (dispatch: Dispatch) => {
-  try {
-    const response: AxiosResponse = await axios.get(`http://localhost:5000/api/users`)
+  const users = await backendApi.getAllUsers()
 
-    dispatch({
-      type: GET_PEER_LIST,
-      payload: response.data,
-    })
-  } catch (err) {
-    console.error(err)
-  }
+  dispatch({
+    type: GET_PEER_LIST,
+    payload: users,
+  })
 }
 /**
  * Telegram API communication
