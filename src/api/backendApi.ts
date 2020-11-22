@@ -1,5 +1,5 @@
 import { AxiosResponse } from 'axios'
-import { IUser } from '../types'
+import { IPeer, IUser } from '../types'
 import service from './config'
 
 class API {
@@ -11,9 +11,9 @@ class API {
    * Users
    */
 
-  async addNewUser(user: IUser) {
+  async addNewPeer(peer: IPeer) {
     try {
-      const response: AxiosResponse = await service.post(`${this.endPoint}users`, user)
+      const response: AxiosResponse = await service.post(`${this.endPoint}users`, peer)
 
       return response
     } catch (err) {

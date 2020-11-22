@@ -17,7 +17,12 @@ export interface TG_IMessage {
   message: string
 }
 
-export interface IPeer extends IUser {}
+export interface IPeer {
+  user_id: string
+  username?: string
+  last_name?: string
+  first_name?: string
+}
 
 export interface TG_IUser {
   user: {

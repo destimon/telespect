@@ -30,7 +30,7 @@ const App = () => {
 
   const definePeer = useCallback(async () => {
     if (receivedMessage && userData) {
-      const tgPeer = await telegramApi.getUser(receivedMessage.user_id, userData.access_hash)
+      const tgPeer = await telegramApi.getPeer(receivedMessage.user_id, userData.access_hash)
       const extractedPeer = telegramHelpers.extractPeer(tgPeer)
 
       setDefinedPeer(extractedPeer)

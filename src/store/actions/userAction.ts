@@ -2,7 +2,7 @@ import { Dispatch } from 'redux'
 import backendApi from '../../api/backendApi'
 import telegramApi from '../../api/telegramApi'
 import telegramHelpers from '../../api/telegramHelpers'
-import { IMessage, IUser } from '../../types'
+import { IMessage, IPeer, IUser } from '../../types'
 import { GET_PEER_LIST, GET_USER, PUSH_NEW_MESSAGE } from '../constants'
 
 /**
@@ -14,8 +14,8 @@ export const getSelfUser = (user: IUser) => ({
   payload: user,
 })
 
-export const savePeer = (user: IUser) => async (dispatch: Dispatch) => {
-  const result = await backendApi.addNewUser(user)
+export const savePeer = (peer: IPeer) => async (dispatch: Dispatch) => {
+  const result = await backendApi.addNewPeer(peer)
 
   console.log(result)
   return {}

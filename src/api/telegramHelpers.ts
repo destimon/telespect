@@ -19,7 +19,6 @@ class TG_Helpers {
       username: tgPeer.user.username,
       first_name: tgPeer.user.first_name,
       last_name: tgPeer.user.last_name,
-      access_hash: tgPeer.user.access_hash,
     }
   }
 }
