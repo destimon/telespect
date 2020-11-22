@@ -21,14 +21,13 @@ export const DefaultLayout = (props: Props) => {
     dispatch(TG_getSelfUser())
   }, [])
 
-  console.log(userData)
   if (!userData) return null
 
   return (
     <Layout>
       <Sider>
         <div className="user-short-info">
-          {userData.user?.first_name}
+          {userData.first_name}
           <Divider />
         </div>
         <Menu theme="dark" mode="inline" defaultSelectedKeys={['1']}>

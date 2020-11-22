@@ -17,7 +17,7 @@ export const Home = (props: Props) => {
           <Divider />
           <Row>
             <Col span={8}>
-              <Title level={3}>{userData?.user?.first_name}</Title>
+              <Title level={3}>{userData?.first_name}</Title>
             </Col>
             <Col span={8}>
               <div className="led-green"></div>

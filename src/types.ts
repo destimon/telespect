@@ -1,20 +1,40 @@
 export interface IUser {
-  user?: {
-    user_id?: string
-    username?: string
-    last_name?: string
-    first_name?: string
-  }
+  user_id: string
+  username?: string
+  last_name?: string
+  first_name?: string
+  access_hash: string
 }
 
 export interface IMessage {
-  user_id: string
+  sender: IPeer
   text: string
 }
 
-export interface IPeer {
+export interface TG_IMessage {
   user_id: string
-  username?: string
-  first_name?: string
-  last_name?: string
+  id: string
+  message: string
+}
+
+export interface IPeer extends IUser {}
+
+export interface TG_IUser {
+  user: {
+    user_id: string
+    username?: string
+    last_name?: string
+    first_name?: string
+    access_hash: string
+  }
+}
+
+export interface TG_IPeer {
+  user: {
+    id: string
+    username?: string
+    last_name?: string
+    first_name?: string
+    access_hash: string
+  }
 }

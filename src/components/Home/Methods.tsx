@@ -8,6 +8,7 @@ interface Props {}
 
 export const Methods = (props: Props) => {
   const messages = useSelector((state: State) => state.user.messages)
+  const peers = useSelector((state: State) => state.user.peers)
 
   const getUnread = async () => {
     try {
@@ -33,7 +34,11 @@ export const Methods = (props: Props) => {
               avatar={
                 <Avatar src="https://zos.alipayobjects.com/rmsportal/ODTLcjxAfvqbxHnVXCYX.png" />
               }
-              title={<a href="https://ant.design">{'Title'}</a>}
+              title={
+                <a href="https://ant.design">
+                  {peers.find(peer => peer.user_id === item.sender.user_id)?.first_name}
+                </a>
+              }
               description={item.text}
             />
           </List.Item>

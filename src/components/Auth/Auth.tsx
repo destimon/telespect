@@ -63,7 +63,6 @@ export const Auth = () => {
       // e.preventDefault()
 
       // if (/[a-zA-Z]/gi.test(e.target.value)) return
-      console.log(code)
       if (stage === AUTH_STAGES_INDEXES.PHONE_STAGE) setPhone(e.target.value)
       else setCode(e.target.value)
     },
