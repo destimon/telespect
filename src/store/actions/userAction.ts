@@ -14,7 +14,6 @@ export const getSelfUser = (user: IUser) => ({
 })
 
 export const savePeer = (user: IUser) => async (dispatch: Dispatch) => {
-  console.log('usr: ', user)
   try {
     const response: AxiosResponse = await axios.post('http://localhost:5000/api/users', {
       user_id: user.user_id,
@@ -67,6 +66,7 @@ export const TG_getSelfUser = () => async (dispatch: Dispatch) => {
       access_hash: res.user.access_hash,
     }
 
+    console.log(res)
     dispatch(getSelfUser(userObj))
   } catch (err) {
     console.error(err)
