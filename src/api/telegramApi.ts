@@ -1,5 +1,5 @@
 import { MTProto } from '@mtproto/core'
-import { GeoInfoRes, SendCodeRes, SignInRes, TG_IPeer, TG_IUser } from '../types'
+import { GeoInfoRes, SendCodeRes, SignInRes, TG_IDialog, TG_IPeer, TG_IUser } from '../types'
 
 export const mtproto = new MTProto({
   api_id: Number(process.env.REACT_APP_TG_API_ID) || -1,
@@ -14,8 +14,6 @@ const inputUser = {
 }
 
 class TG_API {
-  constructor() {}
-
   /**
    * Authorization
    */
@@ -64,16 +62,20 @@ class TG_API {
    */
 
   async getAllDialogs() {
-    return await mtproto.call('messages.getDialogs', {
-      offset_date: 0,
-      offset_id: 0,
+    return (await mtproto.call('messages.getDialogs', {
       offset_peer: {
         _: 'inputPeerEmpty',
       },
-      limit: 0,
-      hash: 123,
-    })
+      limit: 300,
+      hash: 122345,
+    })) as TG_IDialog
   }
+
+  /**
+   * Contacts
+   */
+
+  async getAllContacts() {}
 }
 
 export default new TG_API()

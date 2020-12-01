@@ -56,12 +56,32 @@ export interface SendCodeRes {
 export interface SignInRes {}
 
 export interface TG_IDialog {
-  dialog: {
+  dialogs: {
     pinned: boolean
     unread_mark: boolean
     top_message: number
     unread_count: number
     unread_mentions_count: number
     peer: any
-  }
+  }[]
+
+  chats: {
+    _: string
+    pinned: boolean
+    unread_mark: boolean
+    top_message: number
+    unread_count: number
+    unread_mentions_count: number
+    peer: any
+  }[]
+
+  users: {
+    _: string
+    pinned: boolean
+    unread_mark: boolean
+    top_message: number
+    unread_count: number
+    unread_mentions_count: number
+    peer: any
+  }[]
 }
