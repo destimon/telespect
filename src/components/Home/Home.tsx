@@ -3,13 +3,13 @@ import { Avatar, Col, List, Row } from 'antd'
 import { useSelector } from 'react-redux'
 import { State } from '../../store'
 import Title from 'antd/lib/typography/Title'
+import { IMessage } from '../../types'
 
 interface Props {}
 
 export const Home = (props: Props) => {
   const userData = useSelector((state: State) => state.user.userData)
   const messages = useSelector((state: State) => state.user.messages)
-  const peers = useSelector((state: State) => state.user.peers)
 
   return (
     <div className="page-container">
@@ -29,17 +29,13 @@ export const Home = (props: Props) => {
           <List
             itemLayout="horizontal"
             dataSource={messages}
-            renderItem={item => (
+            renderItem={(item: IMessage) => (
               <List.Item>
                 <List.Item.Meta
                   avatar={
                     <Avatar src="https://zos.alipayobjects.com/rmsportal/ODTLcjxAfvqbxHnVXCYX.png" />
                   }
-                  title={
-                    <a href="https://ant.design">
-                      {peers.find(peer => peer.id === item.sender.id)?.first_name}
-                    </a>
-                  }
+                  title={<a href="https://ant.design">{item.sender.first_name}</a>}
                   description={item.text}
                 />
               </List.Item>
