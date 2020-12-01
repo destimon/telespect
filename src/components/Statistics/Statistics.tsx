@@ -1,7 +1,8 @@
 import React, { useState } from 'react'
 
-import { Tabs } from 'antd'
+import { Col, Row, Tabs } from 'antd'
 import PeerAnalyst from './PeerAnalyst'
+import LineChart from '../Graphs/LineChart'
 
 const { TabPane } = Tabs
 
