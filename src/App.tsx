@@ -39,8 +39,10 @@ const App = () => {
           />
         </Switch>
       </Router>
-      <MessageNotification />
-      <MessageListener />
+      <div style={{ display: 'none' }}>
+        <MessageNotification />
+        <MessageListener />
+      </div>
     </div>
   )
 }
