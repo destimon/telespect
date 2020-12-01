@@ -1,6 +1,7 @@
 import React, { useState } from 'react'
 
 import { Tabs } from 'antd'
+import PeerAnalyst from './PeerAnalyst'
 
 const { TabPane } = Tabs
 
@@ -19,6 +20,9 @@ export const Statistics = (props: Props) => {
       <Tabs defaultActiveKey="1">
         <TabPane tab="General" key="1">
           Content of Tab Pane 1
+        </TabPane>
+        <TabPane tab="Peers">
+          <PeerAnalyst />
         </TabPane>
         <TabPane tab="Incoming" key="2">
           Content of Tab Pane 2

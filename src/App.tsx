@@ -5,7 +5,7 @@ import { Home } from './components/Home/Home'
 import 'antd/dist/antd.css'
 
 import { DefaultLayout } from './layout/DefaultLayout'
-import { Statistics } from './components/Home/Statistics'
+import { Statistics } from './components/Statistics/Statistics'
 import { Methods } from './components/Home/Methods'
 import MessageListener from './components/MessageListener'
 import MessageNotification from './components/MessageNotification'
