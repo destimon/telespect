@@ -54,3 +54,14 @@ export interface SendCodeRes {
 }
 
 export interface SignInRes {}
+
+export interface TG_IDialog {
+  dialog: {
+    pinned: boolean
+    unread_mark: boolean
+    top_message: number
+    unread_count: number
+    unread_mentions_count: number
+    peer: any
+  }
+}

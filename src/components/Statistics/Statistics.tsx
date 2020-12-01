@@ -3,6 +3,7 @@ import React, { useState } from 'react'
 import { Col, Row, Tabs } from 'antd'
 import PeerAnalyst from './PeerAnalyst'
 import LineChart from '../Graphs/LineChart'
+import GeneralAnalyst from './GeneralAnalyst'
 
 const { TabPane } = Tabs
 
@@ -20,7 +21,7 @@ export const Statistics = (props: Props) => {
     <div>
       <Tabs defaultActiveKey="1">
         <TabPane tab="General" key="1">
-          Content of Tab Pane 1
+          <GeneralAnalyst />
         </TabPane>
         <TabPane tab="Peers">
           <PeerAnalyst />

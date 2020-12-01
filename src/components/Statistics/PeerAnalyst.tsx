@@ -22,62 +22,62 @@ const data = [
     tags: ['cool', 'teacher'],
   },
   {
-    key: '3',
+    key: '4',
     name: 'Joe Black',
     age: 32,
     tags: ['cool', 'teacher'],
   },
   {
-    key: '3',
+    key: '5',
     name: 'Joe Black',
     age: 32,
     tags: ['cool', 'teacher'],
   },
   {
-    key: '3',
+    key: '6',
     name: 'Joe Black',
     age: 32,
     tags: ['cool', 'teacher'],
   },
   {
-    key: '3',
+    key: '7',
     name: 'Joe Black',
     age: 32,
     tags: ['cool', 'teacher'],
   },
   {
-    key: '3',
+    key: '8',
     name: 'Joe Black',
     age: 32,
     tags: ['cool', 'teacher'],
   },
   {
-    key: '3',
+    key: '9',
     name: 'Joe Black',
     age: 32,
     tags: ['cool', 'teacher'],
   },
   {
-    key: '3',
+    key: '10',
     name: 'Joe Black',
     age: 32,
     tags: ['cool', 'teacher'],
   },
   {
-    key: '3',
+    key: '11',
     name: 'Joe Black',
     age: 32,
     tags: ['cool', 'teacher'],
   },
 
   {
-    key: '3',
+    key: '12',
     name: 'Joe Black',
     age: 32,
     tags: ['cool', 'teacher'],
   },
   {
-    key: '3',
+    key: '13',
     name: 'Joe Black',
     age: 32,
     tags: ['cool', 'teacher'],
@@ -119,24 +119,14 @@ const PeerAnalyst = (props: Props) => {
         </>
       ),
     },
-    {
-      title: 'Action',
-      key: 'action',
-      render: (text, record) => (
-        <Space size="middle">
-          <a href="#">Invite {record.name}</a>
-          <a href="#">Delete</a>
-        </Space>
-      ),
-    },
   ]
 
   return (
     <Row>
-      <Col span={12}>
+      <Col span={8}>
         <Table columns={columns} dataSource={data} />
       </Col>
-      <Col span={10}>
+      <Col span={14}>
         <LineChart />
       </Col>
     </Row>

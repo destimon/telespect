@@ -58,6 +58,22 @@ class TG_API {
       },
     })) as TG_IPeer
   }
+
+  /**
+   * Dialogs
+   */
+
+  async getAllDialogs() {
+    return await mtproto.call('messages.getDialogs', {
+      offset_date: 0,
+      offset_id: 0,
+      offset_peer: {
+        _: 'inputPeerEmpty',
+      },
+      limit: 0,
+      hash: 123,
+    })
+  }
 }
 
 export default new TG_API()

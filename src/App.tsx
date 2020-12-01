@@ -10,6 +10,8 @@ import { Methods } from './components/Home/Methods'
 import MessageListener from './components/MessageListener'
 import MessageNotification from './components/MessageNotification'
 
+import './App.less'
+
 const App = () => {
   return (
     <div>
