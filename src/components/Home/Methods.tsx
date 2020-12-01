@@ -23,7 +23,7 @@ export const Methods = (props: Props) => {
               }
               title={
                 <a href="https://ant.design">
-                  {peers.find(peer => peer.user_id === item.sender.user_id)?.first_name}
+                  {peers.find(peer => peer.id === item.sender.id)?.first_name}
                 </a>
               }
               description={item.text}

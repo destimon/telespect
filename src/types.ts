@@ -1,5 +1,5 @@
 export interface IUser {
-  user_id: string
+  id: number
   username?: string
   last_name?: string
   first_name?: string
@@ -12,13 +12,14 @@ export interface IMessage {
 }
 
 export interface TG_IMessage {
-  user_id: string
-  id: string
+  user_id: number
+  id: number
   message: string
 }
 
 export interface IPeer {
-  user_id: string
+  id: number
+  user_id: number
   username?: string
   last_name?: string
   first_name?: string
@@ -26,7 +27,7 @@ export interface IPeer {
 
 export interface TG_IUser {
   user: {
-    user_id: string
+    id: number
     username?: string
     last_name?: string
     first_name?: string
@@ -36,7 +37,7 @@ export interface TG_IUser {
 
 export interface TG_IPeer {
   user: {
-    id: string
+    id: number
     username?: string
     last_name?: string
     first_name?: string

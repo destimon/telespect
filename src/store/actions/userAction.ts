@@ -1,3 +1,4 @@
+import { DispatchWithoutAction } from 'react'
 import { Dispatch } from 'redux'
 import backendApi from '../../api/backendApi'
 import telegramApi from '../../api/telegramApi'
@@ -14,10 +15,13 @@ export const getSelfUser = (user: IUser) => ({
   payload: user,
 })
 
-export const savePeer = (peer: IPeer) => async (dispatch: Dispatch) => {
-  const result = await backendApi.addNewPeer(peer)
+export const saveUser = (user: IUser) => async (dispatch: Dispatch) => {
+  const result = await backendApi.saveNewUser(user)
+}
 
-  console.log(result)
+export const savePeer = (peer: IPeer) => async (dispatch: Dispatch) => {
+  const result = await backendApi.saveNewPeer(peer)
+
   return {}
 }
 
@@ -26,12 +30,12 @@ export const pushNewMessage = (message: IMessage) => ({
   payload: message,
 })
 
-export const getPeerList = () => async (dispatch: Dispatch) => {
-  const users = await backendApi.getAllUsers()
+export const getPeerList = (user_id: number) => async (dispatch: Dispatch) => {
+  const peers = await backendApi.getPeersByUserId(user_id)
 
   dispatch({
     type: GET_PEER_LIST,
-    payload: users,
+    payload: peers,
   })
 }
 /**
@@ -43,6 +47,7 @@ export const TG_getSelfUser = () => async (dispatch: Dispatch) => {
     const tgUser = await telegramApi.getSelfUser()
     const user = telegramHelpers.extractUser(tgUser)
 
+    dispatch<any>(saveUser(user))
     dispatch(getSelfUser(user))
   } catch (err) {
     console.error(err)

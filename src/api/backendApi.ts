@@ -8,22 +8,28 @@ class API {
   endPoint = 'api/'
 
   /**
-   * Users
+   * Users / Peers
    */
 
-  async addNewPeer(peer: IPeer) {
+  async saveNewUser(user: IUser) {
     try {
-      const response: AxiosResponse = await service.post(`${this.endPoint}users`, peer)
-
-      return response
+      return await service.post(`${this.endPoint}users`, user)
     } catch (err) {
       console.error(err)
     }
   }
 
-  async getAllUsers() {
+  async saveNewPeer(peer: IPeer) {
     try {
-      const response: AxiosResponse = await service.get(`${this.endPoint}users`)
+      return await service.post(`${this.endPoint}peers`, peer)
+    } catch (err) {
+      console.error(err)
+    }
+  }
+
+  async getPeersByUserId(user_id: number) {
+    try {
+      const response: AxiosResponse = await service.get(`${this.endPoint}peers`)
 
       return response.data
     } catch (err) {

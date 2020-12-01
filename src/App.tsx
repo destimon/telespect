@@ -8,7 +8,13 @@ import 'antd/dist/antd.css'
 import { DefaultLayout } from './layout/DefaultLayout'
 import { Statistics } from './components/Home/Statistics'
 import { Methods } from './components/Home/Methods'
-import { getPeerList, pushNewMessage, savePeer, TG_getSelfUser } from './store/actions/userAction'
+import {
+  getPeerList,
+  pushNewMessage,
+  savePeer,
+  saveUser,
+  TG_getSelfUser,
+} from './store/actions/userAction'
 import telegramApi, { mtproto } from './api/telegramApi'
 import { State } from './store'
 import { IPeer, TG_IMessage } from './types'
@@ -24,14 +30,16 @@ const App = () => {
   // TODO - Need to clean up this mess and sort into components and etc...
 
   useEffect(() => {
-    dispatch(getPeerList())
+    if (userData) {
+      dispatch(getPeerList(userData.id))
+    }
     dispatch(TG_getSelfUser)
   }, [dispatch])
 
   const definePeer = useCallback(async () => {
     if (receivedMessage && userData) {
       const tgPeer = await telegramApi.getPeer(receivedMessage.user_id, userData.access_hash)
-      const extractedPeer = telegramHelpers.extractPeer(tgPeer)
+      const extractedPeer = telegramHelpers.extractPeer(tgPeer, userData.id)
 
       setDefinedPeer(extractedPeer)
       dispatch(savePeer(extractedPeer))
@@ -39,10 +47,8 @@ const App = () => {
   }, [receivedMessage])
 
   useEffect(() => {
-    if (receivedMessage) {
-      const API_definedPeer = peers.find(
-        peer => peer.user_id === receivedMessage.user_id.toString()
-      )
+    if (receivedMessage && peers) {
+      const API_definedPeer = peers.find(peer => peer.id === receivedMessage.user_id)
 
       if (!API_definedPeer) {
         definePeer()
@@ -50,7 +56,7 @@ const App = () => {
         setDefinedPeer(API_definedPeer)
       }
     }
-  }, [receivedMessage])
+  }, [receivedMessage, peers])
 
   useEffect(() => {
     mtproto.updates.on('updateShortMessage', (message: TG_IMessage) => {

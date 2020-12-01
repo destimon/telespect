@@ -49,12 +49,12 @@ class TG_API {
     })) as TG_IUser
   }
 
-  async getPeer(user_id: string, access_hash: string) {
+  async getPeer(user_id: number, access_hash: string) {
     return (await mtproto.call('users.getFullUser', {
       id: {
         _: 'inputUser',
-        user_id: user_id,
-        access_hash: access_hash,
+        user_id,
+        access_hash,
       },
     })) as TG_IPeer
   }
