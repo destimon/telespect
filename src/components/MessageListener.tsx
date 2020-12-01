@@ -7,6 +7,8 @@ import { State } from '../store'
 import { getPeerList, TG_getSelfUser, savePeer, pushNewMessage } from '../store/actions/userAction'
 import { IMessage, IPeer, TG_IMessage } from '../types'
 import { RadiusBottomrightOutlined } from '@ant-design/icons'
+import useSound from 'use-sound'
+import notificationSound from './notification.mp3'
 
 interface Props {}
 
@@ -18,6 +20,8 @@ const MessageListener = (props: Props) => {
   const [receivedMessage, setReceivedMessage] = useState<TG_IMessage | null>(null)
   const [api, contextHolder] = notification.useNotification()
   const messages = useSelector((state: State) => state.user.messages)
+
+  const [playNotification] = useSound(notificationSound)
 
   const openNotification = (newMessage: IMessage) => {
     api.info({
@@ -80,6 +84,7 @@ const MessageListener = (props: Props) => {
   useEffect(() => {
     if (messages.length > 0) {
       openNotification(messages[0])
+      playNotification()
     }
   }, [messages])
 
