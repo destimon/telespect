@@ -32,9 +32,10 @@ const App = () => {
   useEffect(() => {
     if (userData) {
       dispatch(getPeerList(userData.id))
+    } else {
+      dispatch(TG_getSelfUser)
     }
-    dispatch(TG_getSelfUser)
-  }, [dispatch])
+  }, [])
 
   const definePeer = useCallback(async () => {
     if (receivedMessage && userData) {
@@ -44,7 +45,7 @@ const App = () => {
       setDefinedPeer(extractedPeer)
       dispatch(savePeer(extractedPeer))
     }
-  }, [receivedMessage])
+  }, [receivedMessage, userData])
 
   useEffect(() => {
     if (receivedMessage && peers) {

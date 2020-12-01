@@ -1,7 +1,32 @@
 import React, { useState } from 'react'
 
+import { Tabs } from 'antd'
+
+const { TabPane } = Tabs
+
 interface Props {}
 
 export const Statistics = (props: Props) => {
-  return <h1>Statistics</h1>
+  const [current, setCurrent] = useState('mail')
+
+  const handleClick = e => {
+    console.log('click ', e)
+    setCurrent(e.target.value)
+  }
+
+  return (
+    <div>
+      <Tabs defaultActiveKey="1">
+        <TabPane tab="General" key="1">
+          Content of Tab Pane 1
+        </TabPane>
+        <TabPane tab="Incoming" key="2">
+          Content of Tab Pane 2
+        </TabPane>
+        <TabPane tab="Outcoming" key="3">
+          Content of Tab Pane 3
+        </TabPane>
+      </Tabs>
+    </div>
+  )
 }
