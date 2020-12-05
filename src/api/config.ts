@@ -1,7 +1,9 @@
 import axios from 'axios'
 
-const service = axios.create({
+export const service = axios.create({
   baseURL: process.env.REACT_APP_API_HOST_URL,
 })
 
-export default service
+export const ext_service = axios.create({
+  baseURL: process.env.REACT_EXTERNAL_CONNECTION_HOST_URL,
+})

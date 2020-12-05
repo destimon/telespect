@@ -1,7 +1,12 @@
 import React, { useEffect } from 'react'
 
 import { Divider, Layout, Menu } from 'antd'
-import { UploadOutlined, UserOutlined, VideoCameraOutlined } from '@ant-design/icons'
+import {
+  UploadOutlined,
+  UserOutlined,
+  VideoCameraOutlined,
+  DeploymentUnitOutlined,
+} from '@ant-design/icons'
 import { Link } from 'react-router-dom'
 import { useDispatch, useSelector } from 'react-redux'
 import { State } from '../store'
@@ -30,7 +35,7 @@ export const DefaultLayout = (props: Props) => {
           {userData.first_name}
           <Divider />
         </div>
-        <Menu theme="dark" mode="inline" defaultSelectedKeys={['1']}>
+        <Menu theme="dark" mode="inline">
           <Menu.Item key="1" icon={<UserOutlined />}>
             <Link to="/">Home</Link>
           </Menu.Item>
@@ -39,6 +44,9 @@ export const DefaultLayout = (props: Props) => {
           </Menu.Item>
           <Menu.Item key="3" icon={<UploadOutlined />}>
             <Link to="/methods">Methods</Link>
+          </Menu.Item>
+          <Menu.Item key="4" icon={<DeploymentUnitOutlined />}>
+            <Link to="/external">External connection</Link>
           </Menu.Item>
         </Menu>
       </Sider>

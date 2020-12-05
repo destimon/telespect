@@ -2,11 +2,12 @@ import React, { Fragment } from 'react'
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom'
 import { Auth } from './components/Auth/Auth'
 import { Home } from './components/Home/Home'
+import { External } from './components/External/External'
 import 'antd/dist/antd.css'
 
 import { DefaultLayout } from './layout/DefaultLayout'
 import { Statistics } from './components/Statistics/Statistics'
-import { Methods } from './components/Home/Methods'
+import { Methods } from './components/Methods/Methods'
 import MessageListener from './components/MessageListener'
 import MessageNotification from './components/MessageNotification'
 
@@ -17,7 +18,7 @@ const App = () => {
     <div>
       <Router>
         <Switch>
-          <Route exact path={['/', '/statistics', '/methods']}>
+          <Route exact path={['/', '/statistics', '/methods', '/external']}>
             <DefaultLayout>
               <Fragment>
                 <Route exact path="/">
@@ -28,6 +29,9 @@ const App = () => {
                 </Route>
                 <Route exact path="/methods">
                   <Methods />
+                </Route>
+                <Route exact path="/external">
+                  <External />
                 </Route>
               </Fragment>
             </DefaultLayout>

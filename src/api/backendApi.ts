@@ -1,6 +1,6 @@
 import { AxiosResponse } from 'axios'
 import { IPeer, IUser } from '../types'
-import service from './config'
+import { service } from './config'
 
 class API {
   constructor() {}
